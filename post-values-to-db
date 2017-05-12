@@ -1,0 +1,126 @@
+/*
+ Program Name: PHP / MySQL
+ Author:       Diego Sanchez
+ Version:      1.0.
+ Structure:
+		 1: Main method
+*/
+
+/* 1: Main Method
+-------------------------------------------------------------- */
+<?php
+/** *Template Name: Custom Page */
+get_header(); 
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+	h4 {text-align: center;}
+	nav{padding-top: 200px;}
+  
+	@media only screen and (max-width: 500px) {	
+    .nav {padding-top: 0px;}
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4";></div>
+    <div class="col-sm-4">
+		<?php
+						$servername = "";
+						$username = "";
+						$password = "";
+						$dbname = "";
+						
+						// Create connection
+						$conn = new mysqli($servername, $username, $password, $dbname);
+						// Check connection
+						if ($conn->connect_error) {
+							die("Connection failed: " . $conn->connect_error);
+						} 
+						$value0 = mysqli_real_escape_string($conn,$_POST['1']);
+						$value1 = mysqli_real_escape_string($conn,$_POST['2']);
+						$value2 = mysqli_real_escape_string($conn,$_POST['3']);
+						$value3 = mysqli_real_escape_string($conn,$_POST['4']);
+						$value4 = mysqli_real_escape_string($conn,$_POST['5']);
+						$value5 = mysqli_real_escape_string($conn,$_POST['6']);
+						$value6 = mysqli_real_escape_string($conn,$_POST['7']);
+						$value7 = mysqli_real_escape_string($conn,$_POST['8']);
+						$value8 = mysqli_real_escape_string($conn,$_POST['9']);
+						$value9 = mysqli_real_escape_string($conn,$_POST['10']);
+						$value10 = mysqli_real_escape_string($conn,$_POST['11']);
+						$value11 = mysqli_real_escape_string($conn,$_POST['12']);
+						$value12 = mysqli_real_escape_string($conn,$_POST['13']);
+						$value13 = mysqli_real_escape_string($conn,$_POST['14']);
+						$value14 = mysqli_real_escape_string($conn,$_POST['15']);
+						
+						$sql = "INSERT INTO db
+						       (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
+						VALUES ('$value0','$value1','$value2','$value3','$value4','$value5','$value6','$value7','$value8','$value9','$value10','$value11','$value12','$value13','$value14')";
+
+						if ($conn->query($sql) === TRUE) {												
+								$choice = $value10;						 
+									switch ($choice) {						
+									case "R":										
+											$to = "email@a.com";
+											break;														
+									case "N":									
+											$to = "email2@a.com";
+										break;																
+									case "H":									
+											$to = "email3@a.com";							
+										break;																
+									case "P":									
+											$to = "email4@a.com";
+										break;													
+									default:									
+											$to = "email5@a.com";	
+										break;								
+							}											
+							 
+							$subject = "Form Submit";
+							$txt = "This is an automated message.";
+							mail($to,$subject,$txt);
+
+							echo "<br>";
+							echo "<h4>";
+							echo " Thank you for filling out the form."; 
+							echo "</h4>";  
+							echo "<br>";
+							echo "<h4>";
+							echo "<b>";
+							echo  "We will contact you shortly.<br>";	
+							echo "</b>";
+							echo "</h4>";
+								 echo '<script language="javascript">';
+								 echo 'alert("Your form was submited properly. ")';
+								 echo '</script>';
+								 echo "<script>window.close();</script>";
+									
+						} 	else {
+								echo "<b>";
+								echo "Not Proccessed! <br>";
+								echo "Please call us at (111)-111-1111";
+								echo "</b>";
+								echo "<br>";
+								echo "Error: " . $sql . "<br>" . $conn->error;
+						}			
+						$conn->close();
+						?>			
+    </div>
+    <div class="col-sm-4">
+    </div>
+  </div>
+</div>
+</body>
+</html>              
+<?php get_footer(); ?>
